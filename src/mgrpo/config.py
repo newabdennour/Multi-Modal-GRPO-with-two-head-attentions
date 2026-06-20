@@ -7,6 +7,7 @@ GEN_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 CLASSIFIER_PATH = "/mnt/main/prompt_classifier"
 PREF_MODEL = "OpenAssistant/reward-model-deberta-v3-large-v2"
 DATA_PATH = Path("prompts.jsonl")
+CLASSIFIER_DATASET_PATH = Path("classifier_dataset.csv")
 OUTPUT_DIR = Path("two_head_attention_grpo_lora")
 
 # Main controls

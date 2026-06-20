@@ -14,12 +14,19 @@ from mgrpo.rl.rewards import RewardModel, score_responses
 from mgrpo.rl.policy import update_policy
 from mgrpo.training.router import ModalityRouter
 from mgrpo.training.trainer import AttentionTrainer
+from mgrpo.training.train_classifier import train_classifier
 from mgrpo.utils.tracking import Tracker
 
 def main():
     parser = argparse.ArgumentParser(description="Multi-Modal GRPO Training")
     parser.add_argument("--smoke-test", action="store_true", help="Run a quick smoke test")
+    parser.add_argument("--train-classifier", action="store_true", help="Train the prompt classifier first")
     args = parser.parse_args()
+
+    if args.train_classifier:
+        print("Starting classifier training...")
+        train_classifier()
+        print("Classifier training finished. Proceeding to MGRPO setup...")
 
     train_ds, val_ds = load_data(SEED)
     if args.smoke_test:
