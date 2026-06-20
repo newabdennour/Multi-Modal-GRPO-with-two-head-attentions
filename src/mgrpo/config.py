@@ -5,9 +5,9 @@ from pathlib import Path
 HF_TOKEN = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN")
 GEN_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 CLASSIFIER_PATH = "/mnt/main/prompt_classifier"
+CLASSIFIER_DATASET_PATH = Path("data/classifier_dataset.csv")
 PREF_MODEL = "OpenAssistant/reward-model-deberta-v3-large-v2"
-DATA_PATH = Path("prompts.jsonl")
-CLASSIFIER_DATASET_PATH = Path("classifier_dataset.csv")
+DATA_PATH = Path("data/prompts.jsonl")
 OUTPUT_DIR = Path("two_head_attention_grpo_lora")
 
 # Main controls
@@ -84,5 +84,7 @@ MODALITY_PROFILES = {
     9: dict(temperature=0.55, top_p=0.88, max_new_tokens=256, repetition_penalty=1.04),
     10: dict(temperature=0.42, top_p=0.84, max_new_tokens=128, repetition_penalty=1.08),
 }
+
+CANDIDATE_FEATURE_DIM = N_MODALITIES + 6
 
 SYSTEM_PROMPT = "You are a helpful assistant."

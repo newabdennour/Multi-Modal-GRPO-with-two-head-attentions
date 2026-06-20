@@ -36,4 +36,4 @@ pip-delete-this-directory.txt
 
 # Project specific
 two_head_attention_grpo_lora/
-prompts.jsonl
+classifier_output/

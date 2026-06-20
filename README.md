@@ -40,8 +40,8 @@ graph TD
 
 * **Non-Invasive Modality Routing**: No prompt prefixes, no hidden text injection. The LLM processes only the raw user prompt.
 * **Dual Attention Mechanism**: Small, continuously trained attention heads that decouple generation heuristics from preference updates.
-* **Integrated Classifier Training**: Train your own custom prompt classifier directly from a CSV dataset to drive the generation attention head.
 * **Response-Only Policy Update**: The gradient is strictly applied to response tokens; prompt tokens are masked to avoid imitating the prompt structure.
+* **Robust Guardrails**: Integrated penalties for repetitive generation, empty outputs, or prompt leakage.
 * **Enterprise Ready**: Modular package structure, `pyproject.toml` dependency management, and GitHub Actions CI pipeline.
 
 ## 📦 Installation
@@ -59,18 +59,9 @@ pip install -e .
 
 ## 💻 Usage
 
-Ensure you have your prompt dataset placed at `prompts.jsonl`.
+Ensure you have your prompts dataset placed at `data/prompts.jsonl`. If omitted, the system will fall back to a dummy dataset for smoke testing.
 
-### 1. Train the Prompt Classifier (Optional but Recommended)
-If you have a dataset mapping prompts to modalities (`classifier_dataset.csv` with `prompt` and `label` columns), train the classifier first:
-
-```bash
-python src/main.py --train-classifier
-```
-This will train a lightweight sequence classification model and save it to the output directory, which the MGRPO router will automatically use.
-
-### 2. Run MGRPO Training
-To run the full RL training pipeline:
+To run the full training pipeline:
 
 ```bash
 python src/main.py
@@ -109,7 +100,7 @@ Multi-Modal-GRPO-with-two-head-attentions/
 │   │   ├── data/             # Dataset loading and formatting
 │   │   ├── models/           # Attention heads and Generator definitions
 │   │   ├── rl/               # Reward models, guardrails, and policy loss
-│   │   ├── training/         # Routing logic, classifier, and training loops
+│   │   ├── training/         # Routing logic and training loops
 │   │   ├── config.py         # Global hyperparameter configurations
 │   │   └── utils/            # Tracking and statistics
 │   └── main.py               # Main CLI entrypoint
